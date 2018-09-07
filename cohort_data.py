@@ -111,6 +111,7 @@ def hogwarts_by_house(filename):
     all_hogwarts = [sorted(dumbledores_army), sorted(gryffindor), 
     sorted(hufflepuff), sorted(ravenclaw), sorted(slytherin), sorted(ghosts), sorted(instructors)]                            
 
+    myfile.close()
     return all_hogwarts
 
 
@@ -129,8 +130,16 @@ def all_students_tuple_list(filename):
 
     student_list = []
 
-    # Code goes here
+    myfile = open(filename)
+    for line in myfile:
+        student = line.rstrip().split('|')
+        student_name = student[0] + ' ' + student[1]
+        student_tuple = (student_name,) + tuple(student[2:])
+        if student[4] == 'G' or student[4] == 'I':
+            continue
+        student_list.append(student_tuple)
 
+    myfile.close()
     return student_list
 
 
